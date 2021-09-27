@@ -1,0 +1,41 @@
+<hr>
+<div class="row">
+  <div class="col-sm">
+    <h4>Adicionar vagas</h4>
+      <div class="form-group">
+        <label for="vagas">Quantidade</label>
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          id="vagas"
+          [(ngModel)]="qtd"
+          name="title"
+          min="0"
+        />
+      </div>
+    <button type="submit"
+            class="btn btn-success btn-sm"
+            (click)="createVagas(qtd)">
+      Adicionar
+    </button>
+  </div>
+  <div class="col-sm">
+    <h4>Excluir vagas</h4>
+    <div class="form-group">
+      <label for="vaga">Selecione a vaga</label>
+      <select class="form-control form-control-sm" id="vaga" [(ngModel)]="vagaId">
+        <option
+          *ngFor="let vaga of vagas"
+          [ngValue]="vaga.id">
+          {{vaga.id}} - {{vaga.full == true ? 'Ocupada' : 'Livre'}}
+
+        </option>
+      </select>
+    </div>
+    <button type="submit"
+            class="btn btn-success btn-sm"
+            (click)="deleteVaga(vagaId)">
+      Excluir
+    </button>
+  </div>
+</div>

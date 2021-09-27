@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status" [hidden]="!spinner" id="loading">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div>
+  <div class="integration-list row justify-content-center py-5">
+    <div *ngFor="let vaga of vagas | orderBy: 'id'"
+         class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 ">
+
+      <a href="#"
+          [attr.data-target]="target"
+         data-toggle="modal"  (click)="getVagaId(vaga.id!, vaga.full!)">
+        <img class="shadow rounded-circle" [src]="!vaga.full ? 'assets/car-livre.png' : 'assets/car-ocupado2.png'"
+             alt="">
+        <figcaption>{{vaga.id}}</figcaption>
+        <span
+          [ngClass]="vaga.full == false ? 'car-livre' : 'car-ocupado'">
+          {{vaga.full == false ? 'VAGO' : 'OCUPADO'}}
+        </span>
+      </a>
+
+      <app-entrada  [vagaId]="vagaId"></app-entrada>
+      <app-saida ></app-saida>
+
+    </div>
+  </div>
+</div>
+
+
+
+
