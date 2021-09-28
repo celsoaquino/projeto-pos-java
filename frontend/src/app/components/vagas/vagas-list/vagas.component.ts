@@ -16,7 +16,7 @@ export class VagasComponent implements OnInit {
   vagas?: Vaga[];
   @Input() vagaId!: number;
   visible: boolean = false;
-  @Output() veiculoId?: string;
+  veiculoId?: string;
   movimento?: Movimento;
   constructor(private vagaService: VagaService,
               private movimentoService: MovimentoService
@@ -51,6 +51,7 @@ export class VagasComponent implements OnInit {
         this.movimento = data;
         this.veiculoId = this.movimento.veiculoId
         console.log(this.veiculoId)
+        console.log(data)
       })
   }
 }

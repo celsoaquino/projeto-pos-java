@@ -41,11 +41,4 @@ export class SaidaComponent implements OnInit {
           console.log(error);
         });
   }
-
-  getMovimentoByVeiculoId(id: string) {
-    this.movimentoService.getMovimentoByVeiculoId(id)
-      .subscribe(data => {
-        console.log(data)
-      })
-  }
 }
