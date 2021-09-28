@@ -38,7 +38,8 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
         veiculoRepository.save(veiculo);
         Vaga vaga = vagaRepository.getVagaById(veiculo.getVagaId());
         vaga.setVeiculoId(veiculo.getId());
-
+       
+        vagaRepository.save(vaga);
         MovimentoVaga movimentoVaga = new MovimentoVaga();
         movimentoVaga.setVagaId(vagaId);
         movimentoVaga.setVeiculoId(veiculo.getId());

@@ -1,5 +1,5 @@
 export class Vaga {
-  id?: null;
+  id?: number;
   full?: boolean;
   veiculoId?: string;
 }
