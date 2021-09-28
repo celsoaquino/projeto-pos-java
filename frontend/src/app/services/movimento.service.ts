@@ -3,31 +3,33 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Veiculo} from "../models/veiculo";
 import {Movimento} from "../models/movimento";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovimentoService {
 
-  baseUrl = 'http://localhost:8080/movimento'
+  private readonly API = `${environment.API}movimento`;
+
 
   constructor(private http: HttpClient) { }
 
 
 
   entrada(veiculo: Veiculo): Observable<any> {
-    return this.http.post(`${this.baseUrl}/entrada`,  veiculo);
+    return this.http.post(`${this.API}/entrada`,  veiculo);
   }
 
   saida(movimentoId: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/saida/${movimentoId}`, {});
+    return this.http.put(`${this.API}/saida/${movimentoId}`, {});
   }
 
   list(): Observable<any>{
-    return this.http.get(this.baseUrl);
+    return this.http.get(this.API);
   }
 
   getMovimentoByVeiculoId(id: string): Observable<Movimento> {
-    return this.http.get<Movimento>(`${this.baseUrl}/veiculo-id/${id}`);
+    return this.http.get<Movimento>(`${this.API}/veiculo-id/${id}`);
   }
 }

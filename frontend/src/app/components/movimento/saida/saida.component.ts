@@ -34,9 +34,7 @@ export class SaidaComponent implements OnInit {
   getMovimentos(): void {
     this.movimentoService.list()
       .subscribe(data => {
-          console.log(data);
           this.movimentos = data;
-          console.log(this.movimentos)
         },
         error => {
           console.log(error);

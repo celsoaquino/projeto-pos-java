@@ -30,7 +30,6 @@ export class VagasComponent implements OnInit {
   getVagas(): void {
     this.vagaService.list()
       .subscribe(data => {
-          console.log(data);
           if (data) {
             this.spinner = false;
           }
