@@ -9,12 +9,14 @@ import com.celsoaquino.backend.repository.VeiculoRepository;
 import com.celsoaquino.backend.service.MovimentoVagaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MovimentoVagaServiceImpl implements MovimentoVagaService {
 
@@ -38,8 +40,8 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
         veiculoRepository.save(veiculo);
         Vaga vaga = vagaRepository.getVagaById(veiculo.getVagaId());
         vaga.setVeiculoId(veiculo.getId());
-       
         vagaRepository.save(vaga);
+
         MovimentoVaga movimentoVaga = new MovimentoVaga();
         movimentoVaga.setVagaId(vagaId);
         movimentoVaga.setVeiculoId(veiculo.getId());
