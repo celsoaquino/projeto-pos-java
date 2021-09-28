@@ -3,7 +3,6 @@ package com.celsoaquino.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -18,5 +17,5 @@ public class Vaga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean isFull;
-
+    private String veiculoId;
 }

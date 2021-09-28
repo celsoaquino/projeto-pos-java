@@ -7,9 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -33,7 +31,13 @@ public class MovimentoVaga {
     private String veiculoId;
 
     @Column
-    private Long duracao;
+    private String veiculoPlaca;
+
+    @Column
+    private Long vagaId;
+
+    @Column
+    private String duracao;
 
 
 }

@@ -26,7 +26,6 @@ public class VagaServiceImpl implements VagaService {
     @Override
     public Vaga getVagaById(Long id) {
         Vaga vaga = vagaRepository.getVagaById(id);
-        vaga.setFull(true);
         return vaga;
     }
 
@@ -48,5 +47,11 @@ public class VagaServiceImpl implements VagaService {
     public void deleteVaga(Long id) {
         Vaga vaga = vagaRepository.getVagaById(id);
         vagaRepository.delete(vaga);
+    }
+
+    @Override
+    public void setIsFull(Long id) {
+        Vaga vaga = vagaRepository.getVagaById(id);
+        vaga.setFull(true);
     }
 }
