@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EntradaComponent } from './components/movimento/entrada/entrada.component';
 import {NgPipesModule} from "ngx-pipes";
 import { SaidaComponent } from './components/movimento/saida/saida.component';
+import { ListComponent } from './components/movimento/list/list.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SaidaComponent } from './components/movimento/saida/saida.component';
     VagasComponent,
     VagasFormComponent,
     EntradaComponent,
-    SaidaComponent,      ],
+    SaidaComponent,
+    ListComponent,      ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -5,28 +5,34 @@
 </div>
 <div>
   <div class="integration-list row justify-content-center py-5">
-    <div *ngFor="let vaga of vagas | orderBy: 'id'"
-         class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 ">
+    <div
+      *ngFor="let vaga of vagas | orderBy: 'id'"
+      class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 ">
 
-      <a href="#"
-          [attr.data-target]="target"
-         data-toggle="modal"  (click)="getVagaId(vaga.id!, vaga.full!)">
-        <img class="shadow rounded-circle" [src]="!vaga.full ? 'assets/car-livre.png' : 'assets/car-ocupado2.png'"
-             alt="">
+      <a *ngIf="!vaga.full"
+         href="#"
+         data-toggle="modal" data-target="#entradaModal"
+         (click)="getVagaId(vaga.id!, vaga.full!)">
+
+        <img class="shadow rounded-circle" src="assets/car-livre.png" alt="">
         <figcaption>{{vaga.id}}</figcaption>
-        <span
-          [ngClass]="vaga.full == false ? 'car-livre' : 'car-ocupado'">
-          {{vaga.full == false ? 'VAGO' : 'OCUPADO'}}
-        </span>
+        <span class="car-livre">VAGO</span>
       </a>
 
-      <app-entrada  [vagaId]="vagaId"></app-entrada>
-      <app-saida ></app-saida>
+      <a *ngIf="vaga.full"
+         href="#"
+         data-toggle="modal" data-target="#saidaModal"
+         (click)="getMovimentoByVeiculoId(vaga.veiculoId!)">
 
+        <img class="shadow rounded-circle" src="assets/car-ocupado.png" alt="">
+        <figcaption>{{vaga.id}}</figcaption>
+        <span class="car-ocupado">OCUPADO</span>
+      </a>
     </div>
   </div>
 </div>
-
+<app-entrada [vagaId]="vagaId"></app-entrada>
+<app-saida [veiculoId]="veiculoId!"></app-saida>
 
 
 

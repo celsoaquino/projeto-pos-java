@@ -12,7 +12,6 @@ export class VagasFormComponent implements OnInit {
 
   qtd!: number;
   vagaId!: number;
-
   vagas?: Vaga[];
 
   constructor(private vagaService: VagaService,

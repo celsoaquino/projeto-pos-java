@@ -1,0 +1,42 @@
+<hr>
+<div class="container bootstrap snippets bootdey">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="main-box no-header clearfix">
+        <div class="main-box-body clearfix">
+          <div class="table-responsive">
+            <table class="table user-list">
+              <thead>
+              <tr >
+                <th><span>Placa</span></th>
+                <th><span>Entrada</span></th>
+                <th><span>Saida</span></th>
+                <th class="text-center"><span>Vaga</span></th>
+                <th class="text-center"><span>Status</span></th>
+                <th class="text-center"><span>Permanência</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let movimento of movimentos">
+                <td>
+                  {{movimento.veiculoPlaca}}
+                </td>
+                <td>{{ movimento.entrada | date:'dd/MM/yyyy h:mm:ss' }}</td>
+                <td>{{ movimento.saida | date:'dd/MM/yyyy h:mm:ss'}}</td>
+                <td class="text-center">{{ movimento.vagaId }}</td>
+                <td class="text-center">
+                  <span class="label label-default" [ngClass]="movimento.saida == null ? 'badge-danger p-1' : 'badge-success p-1'">
+                    {{ movimento.saida == null ? 'OCUPADO' : 'VAGO'}}</span>
+                </td>
+                <td class="text-center">
+                 <span>{{ movimento.duracao }}</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

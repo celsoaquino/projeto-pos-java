@@ -1,6 +1,8 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Vaga} from "../../../models/vaga";
 import {VagaService} from "../../../services/vaga.service";
+import {MovimentoService} from "../../../services/movimento.service";
+import {Movimento} from "../../../models/movimento";
 
 @Component({
   selector: 'app-vagas',
@@ -9,13 +11,16 @@ import {VagaService} from "../../../services/vaga.service";
 })
 export class VagasComponent implements OnInit {
 
+
   spinner: boolean = true;
   vagas?: Vaga[];
   @Input() vagaId!: number;
   visible: boolean = false;
-  target!: string;
-  toggle!: string;
-  constructor(private vagaService: VagaService) {
+  @Input() veiculoId?: string;
+  movimento?: Movimento;
+  constructor(private vagaService: VagaService,
+              private movimentoService: MovimentoService
+              ) {
   }
 
   ngOnInit(): void {
@@ -25,7 +30,7 @@ export class VagasComponent implements OnInit {
   getVagas(): void {
     this.vagaService.list()
       .subscribe(data => {
-        console.log(data);
+          console.log(data);
           if (data) {
             this.spinner = false;
           }
@@ -39,10 +44,13 @@ export class VagasComponent implements OnInit {
   getVagaId(id: number, full: boolean) {
     this.vagaId = id;
     this.visible = full
-    if (full == false) {
-      this.target = '#entradaModal'
-    } else {
-      this.target = '#saidaModal'
-    }
+  }
+
+  getMovimentoByVeiculoId(id: string) {
+    this.movimentoService.getMovimentoByVeiculoId(id)
+      .subscribe(data => {
+        this.movimento = data;
+        this.veiculoId = this.movimento.veiculoId
+      })
   }
 }

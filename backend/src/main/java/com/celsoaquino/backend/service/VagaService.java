@@ -9,4 +9,5 @@ public interface VagaService {
     Vaga getVagaById(Long id);
     void createVaga(Integer quantity);
     void deleteVaga(Long id);
+    void setIsFull(Long id);
 }
