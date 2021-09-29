@@ -17,7 +17,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let movimento of movimentos">
+              <tr *ngFor="let movimento of movimentos | orderBy: 'entrada'">
                 <td>
                   {{movimento.veiculoPlaca}}
                 </td>
