@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -20,7 +22,8 @@ public class VagaServiceImpl implements VagaService {
 
     @Override
     public List<Vaga> getVagas() {
-        return vagaRepository.findAll();
+        List<Vaga> listOrder = vagaRepository.findAll();
+        return listOrder;
     }
 
     @Override
