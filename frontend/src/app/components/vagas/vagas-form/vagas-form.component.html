@@ -28,7 +28,7 @@
         <option
           *ngFor="let vaga of vagas"
           [ngValue]="vaga.id">
-          {{vagas!.indexOf(vaga) + 1}} - {{vaga.full == true ? 'Ocupada' : 'Livre'}}
+          {{vaga.id}} - {{vaga.full == true ? 'Ocupada' : 'Livre'}}
 
         </option>
       </select>

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MovimentoService} from "../../../services/movimento.service";
 import {Veiculo} from "../../../models/veiculo";
 import {Router} from "@angular/router";
+import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-entrada',
