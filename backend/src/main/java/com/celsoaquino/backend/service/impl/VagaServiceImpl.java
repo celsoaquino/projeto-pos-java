@@ -23,6 +23,7 @@ public class VagaServiceImpl implements VagaService {
     @Override
     public List<Vaga> getVagas() {
         List<Vaga> listOrder = vagaRepository.findAll();
+        Collections.sort(listOrder, Comparator.comparing(Vaga::getId));
         return listOrder;
     }
 
