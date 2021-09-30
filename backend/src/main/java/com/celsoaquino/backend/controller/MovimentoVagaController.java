@@ -1,10 +1,13 @@
 package com.celsoaquino.backend.controller;
 
 import com.celsoaquino.backend.model.MovimentoVaga;
+import com.celsoaquino.backend.model.Vaga;
 import com.celsoaquino.backend.model.Veiculo;
 import com.celsoaquino.backend.service.MovimentoVagaService;
 import com.celsoaquino.backend.service.VagaService;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.asm.Advice;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,10 +38,11 @@ public class MovimentoVagaController {
     }
 
     @PostMapping("/entrada")
-    public ResponseEntity<MovimentoVaga> entrada(@RequestBody Veiculo veiculo) {
+    public ResponseEntity<MovimentoVaga> entrada(@RequestBody Veiculo veiculo) throws Exception {
         String placa = veiculo.getPlaca();
         Long vagaId = veiculo.getVagaId();
         vagaService.setIsFull(veiculo.getVagaId());
+       // TODO verificar se a vaga está ocupada
         return ResponseEntity.ok(movimentoVagaService.createMovimentoVaga(placa, vagaId));
     }
 
