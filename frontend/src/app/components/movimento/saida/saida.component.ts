@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MovimentoService} from "../../../services/movimento.service";
 import {Movimento} from "../../../models/movimento";
 import {Router} from "@angular/router";

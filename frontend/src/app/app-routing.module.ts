@@ -5,9 +5,10 @@ import {VagasFormComponent} from "./components/vagas/vagas-form/vagas-form.compo
 import {ListComponent} from "./components/movimento/list/list.component";
 
 const routes: Routes = [
-  { path: '', component: VagasComponent},
-  {path: 'vagas', component: VagasFormComponent},
-  {path: 'movimento', component: ListComponent}
+  { path: 'home', component: VagasComponent},
+  { path: 'vagas', component: VagasFormComponent},
+  { path: 'movimento', component: ListComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

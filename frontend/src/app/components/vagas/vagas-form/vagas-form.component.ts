@@ -15,8 +15,7 @@ export class VagasFormComponent implements OnInit {
   vagas?: Vaga[];
 
   constructor(private vagaService: VagaService,
-              private router: Router
-  ) {
+              private router: Router) {
   }
 
   ngOnInit(): void {

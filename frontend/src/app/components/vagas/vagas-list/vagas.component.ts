@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Vaga} from "../../../models/vaga";
 import {VagaService} from "../../../services/vaga.service";
 import {MovimentoService} from "../../../services/movimento.service";
@@ -18,9 +18,9 @@ export class VagasComponent implements OnInit {
   visible: boolean = false;
   veiculoId?: string;
   movimento?: Movimento;
+
   constructor(private vagaService: VagaService,
-              private movimentoService: MovimentoService
-              ) {
+              private movimentoService: MovimentoService) {
   }
 
   ngOnInit(): void {

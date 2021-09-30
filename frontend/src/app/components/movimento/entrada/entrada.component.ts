@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MovimentoService} from "../../../services/movimento.service";
 import {Veiculo} from "../../../models/veiculo";
 import {Router} from "@angular/router";
-import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-entrada',
@@ -12,7 +11,7 @@ import {stringify} from "@angular/compiler/src/util";
 export class EntradaComponent implements OnInit {
 
 
-  @Input()vagaId!: number;
+  @Input() vagaId!: number;
   veiculo: Veiculo = {
     placa: '',
     vagaId: 0
@@ -28,11 +27,10 @@ export class EntradaComponent implements OnInit {
   entrada(veiculo: Veiculo) {
     this.movimentoService.entrada(veiculo)
       .subscribe(data => {
+        console.log(data)
         this.router.navigate(['/']).then(() => {
           window.location.reload();
         });
       })
   }
-
-
 }

@@ -7,22 +7,23 @@
       </div>
       <div class="modal-body">
 
-          <div class="row">
-            <div class="col">
-              <div *ngFor="let movimento of movimentos">
-                <div class="price-card" *ngIf="movimento.veiculoId == veiculoId">
-                  <h1 class="badge badge-danger mb-5">DESEJA SAIDA DO VEICULO?</h1>
-                  <ul class="pricing-offers" >
-                    <li ><span class="badge badge-info">PLACA</span> {{ movimento.veiculoPlaca }}</li>
-                    <li><span class="badge badge-info">ENTRADA</span>  {{ movimento.entrada | date: 'dd/MM/yyyy hh:mm:ss '}}</li>
-                    <li><span class="badge badge-info">VAGA</span>  {{ movimento.vagaId }}</li>
-                  </ul>
-                </div>
+        <div class="row">
+          <div class="col">
+            <div *ngFor="let movimento of movimentos">
+              <div class="price-card" *ngIf="movimento.veiculoId == veiculoId">
+                <h1 class="badge badge-danger mb-5">DESEJA SAIDA DO VEICULO?</h1>
+                <ul class="pricing-offers">
+                  <li><span class="badge badge-info">PLACA</span> {{ movimento.veiculoPlaca }}</li>
+                  <li><span
+                    class="badge badge-info">ENTRADA</span>  {{ movimento.entrada | date: 'dd/MM/yyyy hh:mm:ss '}}</li>
+                  <li><span class="badge badge-info">VAGA</span>  {{ movimento.vagaId }}</li>
+                </ul>
               </div>
-              <input type="text" hidden [(ngModel)]="veiculoId">
+            </div>
+            <input type="text" hidden [(ngModel)]="veiculoId">
             <button class="btn btn-primary btn-lg btn-block" (click)="saida(veiculoId!)">Salvar</button>
           </div>
-            </div>
+        </div>
       </div>
       <div class="modal-footer">
         <div class="col-md-1accordion2">
@@ -30,7 +31,7 @@
         </div>
       </div>
     </div>
-      </div>
   </div>
+</div>
 
 

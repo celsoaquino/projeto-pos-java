@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -8,7 +8,7 @@ import {environment} from "../../environments/environment";
 })
 export class VagaService {
 
-   private readonly API = `${environment.API}vagas`;
+  private readonly API = `${environment.API}vagas`;
 
   constructor(private http: HttpClient) { }
 
