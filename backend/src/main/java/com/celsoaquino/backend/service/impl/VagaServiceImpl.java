@@ -50,6 +50,9 @@ public class VagaServiceImpl implements VagaService {
     @Override
     public void deleteVaga(Long id) {
         Vaga vaga = vagaRepository.getVagaById(id);
+        if (vaga.isFull() == true) {
+            throw new IllegalArgumentException("Vaga está ocupada não pode ser excluida.");
+        }
         vagaRepository.delete(vaga);
     }
 

@@ -7,12 +7,17 @@ import com.celsoaquino.backend.repository.MovimentoVagaRepository;
 import com.celsoaquino.backend.repository.VagaRepository;
 import com.celsoaquino.backend.repository.VeiculoRepository;
 import com.celsoaquino.backend.service.MovimentoVagaService;
+import com.celsoaquino.backend.service.VeiculoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -22,24 +27,28 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
 
 
     private final MovimentoVagaRepository movimentoVagaRepository;
+    private final VeiculoService veiculoService;
     private final VeiculoRepository veiculoRepository;
     private final VagaRepository vagaRepository;
 
+
     @Override
-    public List<MovimentoVaga> getMovimentoVagas() {
-        return movimentoVagaRepository.findAll();
+    public Page<MovimentoVaga> getMovimentoVagas(Pageable pageable) {
+        return movimentoVagaRepository.findAll(pageable);
     }
 
 
     @Override
     public MovimentoVaga createMovimentoVaga(String placa, Long vagaId) {
+
         Veiculo veiculo = new Veiculo();
         veiculo.setVagaId(vagaId);
         veiculo.setPlaca(placa);
+        veiculoService.createVeiculo(veiculo);
 
-        veiculoRepository.save(veiculo);
         Vaga vaga = vagaRepository.getVagaById(veiculo.getVagaId());
         vaga.setVeiculoId(veiculo.getId());
+        vaga.setFull(true);
         vagaRepository.save(vaga);
 
         MovimentoVaga movimentoVaga = new MovimentoVaga();
@@ -58,6 +67,7 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
         movimentoVagaUpdate.setDuracao(String.format("%d:%02d:%02d", duration.toHours(), duration.toMinutesPart(), duration.toSecondsPart()));
 
         Veiculo veiculo = veiculoRepository.getById(movimentoVagaUpdate.getVeiculoId());
+        veiculoRepository.deleteById(veiculo.getId());
         Vaga vaga = vagaRepository.getVagaById(veiculo.getVagaId());
         vaga.setVeiculoId(null);
         vaga.setFull(false);
@@ -68,6 +78,14 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
     public MovimentoVaga getMovimentoVagaByVeiculoId(String id) {
         return movimentoVagaRepository.getMovimentoVagaByVeiculoId(id);
     }
+
+    @Override
+    public List<MovimentoVaga> findAllMovimentos() {
+        List<MovimentoVaga> list = movimentoVagaRepository.findAll();
+        Collections.sort(list, Comparator.comparing(MovimentoVaga::getEntrada).reversed());
+        return list;
+    }
+
 
     @Override
     public MovimentoVaga getMovimentoVagaById(String id) {
