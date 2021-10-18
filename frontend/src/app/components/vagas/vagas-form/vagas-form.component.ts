@@ -10,9 +10,14 @@ import {Vaga} from "../../../models/vaga";
 })
 export class VagasFormComponent implements OnInit {
 
-  qtd!: number;
+
+  errorMessage!: string;
+  invalid = '';
   vagaId!: number;
   vagas?: Vaga[];
+  qtd = {
+    'quantindade': 0
+  };
 
   constructor(private vagaService: VagaService,
               private router: Router) {
@@ -35,9 +40,8 @@ export class VagasFormComponent implements OnInit {
   }
 
   getVagas(): void {
-    this.vagaService.list()
+    this.vagaService.listVagas()
       .subscribe(data => {
-          console.log(data);
           this.vagas = data
         },
         error => {
@@ -53,7 +57,10 @@ export class VagasFormComponent implements OnInit {
           });
         },
         error => {
-          console.log(error);
+          this.errorMessage = error.error;
+         this.invalid = 'is-invalid';
+          setTimeout(() =>
+            this.invalid = '', 3000)
         })
   }
 }

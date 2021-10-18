@@ -6,7 +6,6 @@
         <h1 class="modal-title" id="exampleModalLabel">Saida</h1>
       </div>
       <div class="modal-body">
-
         <div class="row">
           <div class="col">
             <div *ngFor="let movimento of movimentos">
@@ -20,7 +19,6 @@
                 </ul>
               </div>
             </div>
-            <input type="text" hidden [(ngModel)]="veiculoId">
             <button class="btn btn-primary btn-lg btn-block" (click)="saida(veiculoId!)">Salvar</button>
           </div>
         </div>

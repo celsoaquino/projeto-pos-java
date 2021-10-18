@@ -17,6 +17,7 @@ export class SaidaComponent implements OnInit {
   constructor(
     private router: Router,
     private movimentoService: MovimentoService) {
+
   }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class SaidaComponent implements OnInit {
 
   saida(id: string) {
     this.movimentoService.saida(id)
-      .subscribe(data => {
+      .subscribe(() => {
         this.router.navigate(['/']).then(() => {
           window.location.reload();
         });

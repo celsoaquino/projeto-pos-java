@@ -12,6 +12,8 @@ import {EntradaComponent} from './components/movimento/entrada/entrada.component
 import {NgPipesModule} from "ngx-pipes";
 import {SaidaComponent} from './components/movimento/saida/saida.component';
 import {ListComponent} from './components/movimento/list/list.component';
+import {CommonModule} from "@angular/common";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -25,11 +27,13 @@ import {ListComponent} from './components/movimento/list/list.component';
     ListComponent,      ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgPipesModule
+    NgPipesModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-<div id="entradaModal" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
+<div id="entradaModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,12 +7,24 @@
       <div class="modal-body">
         <form class="form col-md-12 center-block" #form="ngForm" (ngSubmit)="entrada(form.value)">
           <input type="text" hidden name="vagaId" [ngModel]="vagaId">
-          <div class="form-group">
-            <input type="text" class="form-control input-lg" placeholder="Placa" name="placa" [(ngModel)]="veiculo.placa" >
+          <div *ngIf="errorMessage"
+               class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div class="form-group mb-lg-4">
+            <input type="text" class="form-control input-lg" placeholder="Placa" name="placa" autocomplete="off"
+                   maxlength="7"
+                   required
+                   [ngClass]="placaValida ? 'is-valid' : 'is-invalid'"
+                   oninput="this.value = this.value.toUpperCase()"
+                   (keydown.space)="$event.preventDefault()"
+                   [(ngModel)]="veiculo.placa"
+                   (ngModelChange)="validarPlaca(form.value.placa)">
           </div>
           <div class="form-group">
             <button
-              class="btn btn-primary btn-lg btn-block" >Salvar</button>
+              class="btn btn-primary btn-lg btn-block">Salvar
+            </button>
           </div>
         </form>
       </div>

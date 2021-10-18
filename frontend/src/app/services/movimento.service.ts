@@ -26,7 +26,11 @@ export class MovimentoService {
   }
 
   list(): Observable<any> {
-    return this.http.get(this.API);
+    return this.http.get(`${this.API}/findAll`);
+  }
+
+  pageList(page: number, size: number): Observable<any> {
+    return this.http.get(`${this.API}?page=${page}&size=${size}`);
   }
 
   getMovimentoByVeiculoId(id: string): Observable<Movimento> {

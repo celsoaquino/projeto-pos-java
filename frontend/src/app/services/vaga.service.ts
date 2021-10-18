@@ -12,12 +12,12 @@ export class VagaService {
 
   constructor(private http: HttpClient) { }
 
-  list(): Observable<any>{
+  listVagas(): Observable<any>{
     return this.http.get(this.API);
   }
 
   create(qtd: number): Observable<any> {
-    return this.http.get(`${this.API}/${qtd}`)
+    return this.http.post(`${this.API}`, qtd)
   }
 
   delete(id: number): Observable<any> {

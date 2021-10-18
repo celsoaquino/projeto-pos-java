@@ -11,10 +11,9 @@ import {Movimento} from "../../../models/movimento";
 })
 export class VagasComponent implements OnInit {
 
-
-  spinner: boolean = true;
-  vagas?: Vaga[];
   @Input() vagaId!: number;
+  spinner: boolean = true;
+  vagas: Vaga[] = [];
   visible: boolean = false;
   veiculoId?: string;
   movimento?: Movimento;
@@ -27,17 +26,14 @@ export class VagasComponent implements OnInit {
     this.getVagas();
   }
 
-  getVagas(): void {
-    this.vagaService.list()
+  getVagas() {
+    this.vagaService.listVagas()
       .subscribe(data => {
-          if (data) {
-            this.spinner = false;
-          }
-          this.vagas = data;
-        },
-        error => {
-          console.log(error);
-        });
+        if (data) {
+          this.spinner = false;
+        }
+        this.vagas = data;
+      });
   }
 
   getVagaId(id: number, full: boolean) {
@@ -50,8 +46,6 @@ export class VagasComponent implements OnInit {
       .subscribe(data => {
         this.movimento = data;
         this.veiculoId = this.movimento.veiculoId
-        console.log(this.veiculoId)
-        console.log(data)
       })
   }
 }
