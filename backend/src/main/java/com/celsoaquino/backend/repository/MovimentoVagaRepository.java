@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovimentoVagaRepository extends JpaRepository<MovimentoVaga, String> {
     MovimentoVaga getMovimentoVagaByVeiculoId(String id);
+
 }

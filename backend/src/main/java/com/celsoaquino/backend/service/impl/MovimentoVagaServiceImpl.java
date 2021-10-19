@@ -9,16 +9,16 @@ import com.celsoaquino.backend.repository.VeiculoRepository;
 import com.celsoaquino.backend.service.MovimentoVagaService;
 import com.celsoaquino.backend.service.VeiculoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,12 +30,6 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
     private final VeiculoService veiculoService;
     private final VeiculoRepository veiculoRepository;
     private final VagaRepository vagaRepository;
-
-
-    @Override
-    public Page<MovimentoVaga> getMovimentoVagas(Pageable pageable) {
-        return movimentoVagaRepository.findAll(pageable);
-    }
 
 
     @Override
@@ -86,9 +80,20 @@ public class MovimentoVagaServiceImpl implements MovimentoVagaService {
         return list;
     }
 
+    @Override
+    public List<MovimentoVaga> getMovimentoVagaByEntrada(LocalDate entrada) {
+        List<MovimentoVaga> list = movimentoVagaRepository.findAll();
+        return list.stream()
+                .filter(d ->
+                        (trasnformDate(d.getEntrada()).compareTo(entrada) == 0)).collect(Collectors.toList());
+    }
 
     @Override
     public MovimentoVaga getMovimentoVagaById(String id) {
         return movimentoVagaRepository.findById(id).get();
+    }
+
+    private LocalDate trasnformDate(LocalDateTime l) {
+        return LocalDate.of(l.getYear(), l.getMonth(), l.getDayOfMonth());
     }
 }

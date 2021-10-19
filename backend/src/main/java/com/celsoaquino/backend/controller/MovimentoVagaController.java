@@ -5,12 +5,12 @@ import com.celsoaquino.backend.model.Veiculo;
 import com.celsoaquino.backend.service.MovimentoVagaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -21,11 +21,6 @@ import java.util.List;
 public class MovimentoVagaController {
 
     private final MovimentoVagaService movimentoVagaService;
-
-    @GetMapping()
-    public ResponseEntity<Page<MovimentoVaga>> getMovimentoVagas(Pageable pageable) {
-        return ResponseEntity.ok(movimentoVagaService.getMovimentoVagas(pageable));
-    }
 
     @GetMapping("/findAll")
     public ResponseEntity<List<MovimentoVaga>> getAllMovimentos() {
@@ -60,17 +55,9 @@ public class MovimentoVagaController {
         return ResponseEntity.ok(movimentoVagaService.updateMovimentoVaga(id));
     }
 
-
-    /*@ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }*/
+    @GetMapping("/data")
+    public ResponseEntity<List<MovimentoVaga>> getMovimentoData(@RequestParam("from")
+                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data) {
+        return ResponseEntity.ok(movimentoVagaService.getMovimentoVagaByEntrada(data));
+    }
 }
