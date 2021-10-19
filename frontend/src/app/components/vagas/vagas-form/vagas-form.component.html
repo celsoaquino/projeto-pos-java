@@ -1,47 +1,47 @@
-<hr>
-<div class="row">
-  <div class="col-sm">
-    <h4>Adicionar vagas</h4>
-    <div class="form-group">
-      <label for="vagas">Quantidade</label>
-      <input
-        type="number"
-        class="form-control form-control-sm"
-        id="vagas"
-        [(ngModel)]="qtd.quantindade"
-        name="title"
-        min="0"
-        autocomplete="off"/>
-    </div>
-    <button type="submit"
-            class="btn btn-success btn-sm"
-            (click)="createVagas(qtd.quantindade)">
-      Adicionar
-    </button>
-  </div>
-  <div class="col-sm">
-    <h4>Excluir vagas</h4>
-    <div class="form-group">
-      <label for="vaga">Selecione a vaga</label>
-      <select class="form-control form-control-sm" [ngClass]="invalid" id="vaga" aria-describedby="validationServer04Feedback" [(ngModel)]="vagaId">
-        <option
-          *ngFor="let vaga of vagas | orderBy: 'id'"
-          [ngValue]="vaga.id">
-          {{vaga.id}} - {{vaga.full == true ? 'Ocupada' : 'Livre'}}
-        </option>
-      </select>
-      <div *ngIf="errorMessage" id="validationServer04Feedback" class="invalid-feedback">
-        {{ errorMessage }}
+<div class="container">
+  <div class="row">
+    <div class="col-sm mt-5">
+      <h4>Adicionar vagas</h4>
+      <div class="form-group">
+        <label for="vagas">Quantidade</label>
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          id="vagas"
+          [(ngModel)]="qtd.quantindade"
+          name="title"
+          min="0"
+          autocomplete="off"/>
       </div>
+      <button type="submit"
+              class="btn btn-success btn-sm"
+              (click)="createVagas(qtd.quantindade)">
+        Adicionar
+      </button>
     </div>
-    <button type="submit"
-            class="btn btn-success btn-sm"
-            (click)="deleteVaga(vagaId)">
-      Excluir
-    </button>
+    <div class="col-sm mt-5">
+      <h4>Excluir vagas</h4>
+      <div class="form-group">
+        <label for="vaga">Selecione a vaga</label>
+        <select class="form-control form-control-sm" [ngClass]="invalid" id="vaga"
+                aria-describedby="validationServer04Feedback" [(ngModel)]="vagaId">
+          <option
+            *ngFor="let vaga of vagas | orderBy: 'id'"
+            [ngValue]="vaga.id">
+            {{vaga.id}} - {{vaga.full == true ? 'Ocupada' : 'Livre'}}
+          </option>
+        </select>
+        <div *ngIf="errorMessage" id="validationServer04Feedback" class="invalid-feedback">
+          {{ errorMessage }}
+        </div>
+      </div>
+      <button type="submit"
+              class="btn btn-success btn-sm"
+              (click)="deleteVaga(vagaId)">
+        Excluir
+      </button>
+    </div>
   </div>
 </div>
-
-
 
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MovimentoService} from "../../../services/movimento.service";
-import {Movimento, MovimentoPage} from "../../../models/movimento";
+import {Movimento} from "../../../models/movimento";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-list',
@@ -10,13 +11,11 @@ import {Movimento, MovimentoPage} from "../../../models/movimento";
 export class ListComponent implements OnInit {
 
   movimentos!: Movimento[];
-  movimentoPage!: MovimentoPage;
   size = 10;
   filtro: string = "";
   page: number = 1;
-  disableVago!: boolean;
-  disableOcupado!: boolean;
 
+  data!: any;
 
 
   constructor(private movimentoService: MovimentoService) {
@@ -24,17 +23,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
-    //this.pageList(0, this.size)
   }
-
-  /*pageList(page: number, size: number) {
-    this.movimentoService.pageList(page, size)
-      .subscribe(data => {
-        this.movimentos = data.content;
-        this.movimentoPage = data;
-
-      })
-  }*/
 
   list() {
     this.movimentoService.list()
@@ -47,39 +36,58 @@ export class ListComponent implements OnInit {
     this.size = size;
   }
 
+
+  filtrarPoData(e: FormControl) {
+    this.page = 1
+    this.movimentoService.filtroPorData(this.data)
+      .subscribe(data => {
+        this.movimentos = data;
+      })
+  }
+
   filtrarPlaca(filtro: string) {
+    this.page = 1;
     if (filtro) {
-      this.page = 1;
       this.movimentos = this.movimentos
         .filter(p =>
           p.veiculoPlaca!.indexOf(filtro) >= 0);
     } else {
+      this.data = '';
       this.list()
     }
   }
 
-  onOcupadoChange(event: Event) {
-    const isCheckedOcupado = (event.target as HTMLInputElement).checked;
-    if (isCheckedOcupado) {
+  mostrarTodos() {
+    this.page = 1;
+    this.data = '';
+    this.list();
+  }
+
+
+  /*onOcupadoChange(event: Event) {
+    this.isCheckedOcupado = (event.target as HTMLInputElement).checked;
+    this.page = 1
+    if (this.isCheckedOcupado) {
       this.disableVago = true;
-      this.movimentos = this.movimentos.filter( o => o.saida == null)
+      this.movimentos = this.movimentos.filter(o => o.saida == null)
     } else {
-      this.page = 1;
       this.disableVago = false
+      this.data = '';
       this.list();
     }
   }
 
   onVagoChange(event: Event) {
-     const isCheckedVago =  (event.target as HTMLInputElement).checked;
-     console.log(event)
-    if (isCheckedVago) {
+    this.isCheckedVago = (event.target as HTMLInputElement).checked;
+    this.page = 1
+    if (this.isCheckedVago) {
       this.disableOcupado = true;
-      this.movimentos = this.movimentos.filter( o => o.saida != null)
+      this.movimentos = this.movimentos.filter(o => o.saida != null)
     } else {
-      this.page = 1;
-      this.disableOcupado = false
+      this.disableOcupado = false;
+      this.data = '';
       this.list();
     }
-  }
+  }*/
+
 }

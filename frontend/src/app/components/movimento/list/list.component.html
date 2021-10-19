@@ -1,39 +1,51 @@
-<hr>
-<div class="shadow mb-5 bg-white rounded">
-  <div class="card">
-    <div class="row justify-content-center mt-2">
-      <div class="form-inline mt-2">
-        <input class="form-control mr-5" type="search" placeholder="Procurar por placa..." name="search" aria-label="Search"
-               autocomplete="off"
-               oninput="this.value = this.value.toUpperCase()"
-               [(ngModel)]="filtro"
-               (ngModelChange)="filtrarPlaca(filtro)">
+<div class="container">
+<div class="row">
+  <div class="col-lg-12 mt-4">
+    <div class="mt-4">
+      <div class="shadow mb-4 bg-white rounded">
+        <div class="card">
+          <div class="card-header">
+            <div class="form-inline">
+              <input class="form-control m-1 " type="date" placeholder="Procurar por data..." name="filtroPorData"
+                     aria-label="data"
+                     [(ngModel)]="data"
+                     (ngModelChange)="filtrarPoData(data)"
+              >
 
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                 (change)="onOcupadoChange($event)"
-                 [disabled]="disableOcupado"
-          >
-          <label class="label label-default badge-danger p-1" for="defaultCheck1">
-            OCUPADO
-          </label>
-        </div>
-        <div class="form-check form-check-inline ">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2"
-                 (change)="onVagoChange($event)"
-                 [disabled]="disableVago"
-                 >
-          <label class="label label-default badge-success p-1" for="defaultCheck2">
-            VAGO
-          </label>
-        </div>
-      </div>
-    </div>
+              <input class="form-control m-1" type="search" placeholder="Procurar por placa..." name="filtro"
+                     aria-label="Search"
+                     autocomplete="off"
+                     oninput="this.value = this.value.toUpperCase()"
+                     [(ngModel)]="filtro"
+                     (ngModelChange)="filtrarPlaca(filtro)">
 
+              <!--<div class="form-check form-check-inline mt-1">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                       (change)="onOcupadoChange($event)"
+                       [disabled]="disableOcupado"
+                >
+                <label class="label label-default badge-danger p-1" for="defaultCheck1">
+                  OCUPADO
+                </label>
+              </div>
+              <div class="form-check form-check-inline mt-1">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2"
+                       (change)="onVagoChange($event)"
+                       [disabled]="disableVago"
+                >
+                <label class="label label-default badge-success p-1" for="defaultCheck2">
+                  VAGO
+                </label>
+              </div>-->
+              <div class="form-check form-check-inline m-1">
+                <button class="btn btn-primary btn-sm" type="button" id="defaultCheck3"
+                        (click)="mostrarTodos()"
 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="main-box no-header clearfix">
+                >Mostar todos
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="main-box-body clearfix">
             <div class="table-responsive">
               <table class="table user-list meal-list">
@@ -78,5 +90,6 @@
       </pagination-controls>
     </div>
   </div>
+</div>
 </div>
 

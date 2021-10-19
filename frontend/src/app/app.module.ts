@@ -12,7 +12,7 @@ import {EntradaComponent} from './components/movimento/entrada/entrada.component
 import {NgPipesModule} from "ngx-pipes";
 import {SaidaComponent} from './components/movimento/saida/saida.component';
 import {ListComponent} from './components/movimento/list/list.component';
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 
 
@@ -35,7 +35,7 @@ import {NgxPaginationModule} from "ngx-pagination";
     NgPipesModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

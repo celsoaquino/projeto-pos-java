@@ -25,8 +25,8 @@ export class MovimentoService {
     return this.http.put(`${this.API}/saida/${movimentoId}`, {});
   }
 
-  list(): Observable<any> {
-    return this.http.get(`${this.API}/findAll`);
+  list(): Observable<Movimento[]> {
+    return this.http.get<Movimento[]>(`${this.API}/findAll`);
   }
 
   pageList(page: number, size: number): Observable<any> {
@@ -35,5 +35,9 @@ export class MovimentoService {
 
   getMovimentoByVeiculoId(id: string): Observable<Movimento> {
     return this.http.get<Movimento>(`${this.API}/veiculo-id/${id}`);
+  }
+
+  filtroPorData(data: string): Observable<Movimento[]> {
+    return this.http.get<Movimento[]>(`${this.API}/data?from=${data}`)
   }
 }
