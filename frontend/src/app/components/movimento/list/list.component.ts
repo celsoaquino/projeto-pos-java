@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MovimentoService} from "../../../services/movimento.service";
 import {Movimento} from "../../../models/movimento";
 import {FormControl} from "@angular/forms";
+import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 @Component({
   selector: 'app-list',
@@ -11,11 +12,11 @@ import {FormControl} from "@angular/forms";
 export class ListComponent implements OnInit {
 
   movimentos!: Movimento[];
-  size = 10;
-  filtro: string = "";
-  page: number = 1;
 
+  filtro: string = '';
+  page: number = 1;
   data!: any;
+  size = 10;
 
 
   constructor(private movimentoService: MovimentoService) {
@@ -38,19 +39,21 @@ export class ListComponent implements OnInit {
 
 
   filtrarPoData(e: FormControl) {
-    this.page = 1
+    this.page = 1;
+    this.filtro = '';
     this.movimentoService.filtroPorData(this.data)
       .subscribe(data => {
         this.movimentos = data;
+
       })
   }
 
-  filtrarPlaca(filtro: string) {
+  filtrarPlaca(filtro: Event) {
     this.page = 1;
     if (filtro) {
       this.movimentos = this.movimentos
         .filter(p =>
-          p.veiculoPlaca!.indexOf(filtro) >= 0);
+          p.veiculoPlaca!.indexOf(this.filtro) >= 0);
     } else {
       this.data = '';
       this.list()
@@ -63,6 +66,11 @@ export class ListComponent implements OnInit {
     this.list();
   }
 
+  /*onTableSizeChange(event: Event): void {
+    this.size = Number((event.target as HTMLInputElement).value)
+    this.page = 1;
+    this.list();
+  }*/
 
   /*onOcupadoChange(event: Event) {
     this.isCheckedOcupado = (event.target as HTMLInputElement).checked;

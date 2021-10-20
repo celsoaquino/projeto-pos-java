@@ -17,7 +17,7 @@
                      autocomplete="off"
                      oninput="this.value = this.value.toUpperCase()"
                      [(ngModel)]="filtro"
-                     (ngModelChange)="filtrarPlaca(filtro)">
+                     (ngModelChange)="filtrarPlaca($event)">
 
               <!--<div class="form-check form-check-inline mt-1">
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
@@ -44,7 +44,17 @@
                 >Mostar todos
                 </button>
               </div>
+
+             <!-- <div class="form-inline " >
+              <select (change)="onTableSizeChange($event)" class="custom-select form-control my-2 my-lg-0">
+                <option [ngValue]="5">05</option>
+                <option [ngValue]="10" selected>10</option>
+                <option [ngValue]="20">20</option>
+                <option [ngValue]="50">50</option>
+              </select>
+              </div>-->
             </div>
+
           </div>
           <div class="main-box-body clearfix">
             <div class="table-responsive">
@@ -61,8 +71,9 @@
                 </thead>
                 <tbody>
                 <tr
-                  *ngFor="let movimento of movimentos | orderBy: 'saida' | paginate: { itemsPerPage: size, currentPage: page } ">
-
+                  *ngFor="let movimento of movimentos | orderBy: 'saida' | paginate: {
+                  itemsPerPage: size,
+                  currentPage: page } ">
                   <td>{{movimento.veiculoPlaca}}</td>
                   <td>{{ movimento.entrada | date:'dd/MM/yyyy HH:mm:ss' }}</td>
                   <td>{{ movimento.saida | date:'dd/MM/yyyy HH:mm:ss'}}</td>
@@ -78,13 +89,17 @@
                 </tr>
                 </tbody>
               </table>
+              <div class="m-2 text-info" *ngIf="movimentos?.length === 0" >
+                <span style="font-size: small">Dados não encontrados.</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
       <pagination-controls (pageChange)="page = $event"
+
                            previousLabel="Anterior"
                            nextLabel="Próximo">
       </pagination-controls>

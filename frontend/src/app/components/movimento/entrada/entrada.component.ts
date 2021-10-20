@@ -51,4 +51,7 @@ export class EntradaComponent implements OnInit {
     }
   }
 
+  limparCampo() {
+    this.veiculo.placa = '';
+  }
 }
