@@ -7,18 +7,20 @@
       <div class="modal-body">
         <form class="form col-md-12 center-block" #form="ngForm" (ngSubmit)="entrada(form.value)">
           <input type="text" hidden name="vagaId" [ngModel]="vagaId">
-          <div *ngIf="errorMessage"
-               class="alert alert-danger" role="alert">
-            {{ errorMessage }}
-          </div>
+          <div *ngIf="isError" class="alert alert-danger" role="alert">
+            <div *ngFor="let errors of errorMessage">
+                  {{ errors }}
+            </div>
+      </div>
           <div class="form-group mb-lg-4">
-            <input type="text" class="form-control input-lg" placeholder="Placa" name="placa" autocomplete="off"
+            <input type="text" class="form-control input-lg" placeholder="Placa" id="placa" name="placa" autocomplete="off"
+                   aria-describedby="validationServer04Feedback"
                    maxlength="7"
                    required
-                   [ngClass]="placaValida ? 'is-valid' : 'is-invalid'"
+                   [ngClass]="isValidPlaca ? 'is-valid' : 'is-invalid'"
                    oninput="this.value = this.value.toUpperCase()"
                    (keydown.space)="$event.preventDefault()"
-                   [(ngModel)]="veiculo.placa"
+                   [(ngModel)]="form.value.placa"
                    (ngModelChange)="validarPlaca(form.value.placa)">
           </div>
           <div class="form-group">
@@ -30,7 +32,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-md-1accordion2">
-          <button class="btn" data-dismiss="modal" (click)="limparCampo()" aria-hidden="true">Cancelar</button>
+          <button class="btn" data-dismiss="modal" (click)="limparCampo(form)" aria-hidden="true">Cancelar</button>
         </div>
       </div>
     </div>

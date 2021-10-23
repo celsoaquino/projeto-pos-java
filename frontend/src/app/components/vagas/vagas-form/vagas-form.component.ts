@@ -57,8 +57,9 @@ export class VagasFormComponent implements OnInit {
           });
         },
         error => {
-          this.errorMessage = error.error;
+          this.errorMessage = error.error.message;
          this.invalid = 'is-invalid';
+          console.log(error);
           setTimeout(() =>
             this.invalid = '', 3000)
         })

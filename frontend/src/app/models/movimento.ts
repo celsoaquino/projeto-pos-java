@@ -8,14 +8,3 @@ export class Movimento {
   veiculoPlaca?: string;
 }
 
-export class MovimentoPage {
-  content?: Movimento[];
-  last?: boolean;
-  totalElements?: number;
-  totalPages?: number;
-  size?: number;
-  number?: number;
-  first?: boolean;
-  numberOfElements?: number;
-  empty?: boolean;
-}

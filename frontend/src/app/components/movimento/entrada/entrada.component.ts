@@ -3,6 +3,7 @@ import {MovimentoService} from "../../../services/movimento.service";
 import {Veiculo} from "../../../models/veiculo";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {FormControl, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-entrada',
@@ -12,12 +13,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class EntradaComponent implements OnInit {
 
   @Input() vagaId!: number;
-  errorMessage!: string;
-  placaValida!: boolean;
-  veiculo: Veiculo = {
-    placa: '',
-    vagaId: 0
-  };
+  errorMessage!: [];
+  isError = false;
+  isValidPlaca!: boolean;
+  veiculo!: Veiculo;
 
   constructor(private movimentoService: MovimentoService,
               private router: Router) {
@@ -35,23 +34,25 @@ export class EntradaComponent implements OnInit {
           });
         },
         (error: HttpErrorResponse) => {
+         this.isError = true;
+          this.errorMessage = error.error.errors;
           console.log(error)
-          this.errorMessage = error.error;
           setTimeout(() =>
-            this.errorMessage = '', 3000)
+            this.isError = false, 3000)
         })
   }
 
   validarPlaca(placa: string) {
-    const regex = /[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/;
-    if (regex.test(placa)) {
-      this.placaValida = true;
+    const pattern = new RegExp('[A-Z]{3}[0-9][0-9A-Z][0-9]{2}');
+    if (pattern.test(placa)) {
+      this.isValidPlaca= true;
     } else {
-      this.placaValida = false;
+      this.isValidPlaca = false;
     }
   }
 
-  limparCampo() {
-    this.veiculo.placa = '';
+
+  limparCampo(f: NgForm) {
+    f.resetForm();
   }
 }

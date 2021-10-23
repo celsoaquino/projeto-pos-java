@@ -10,12 +10,10 @@ import {environment} from "../../environments/environment";
 })
 export class MovimentoService {
 
-  private readonly API = `${environment.API}movimento`;
-
+  private readonly API = `${environment.API}movimentos`;
 
   constructor(private http: HttpClient) {
   }
-
 
   entrada(veiculo: Veiculo): Observable<any> {
     return this.http.post(`${this.API}/entrada`, veiculo);
@@ -26,11 +24,7 @@ export class MovimentoService {
   }
 
   list(): Observable<Movimento[]> {
-    return this.http.get<Movimento[]>(`${this.API}/findAll`);
-  }
-
-  pageList(page: number, size: number): Observable<any> {
-    return this.http.get(`${this.API}?page=${page}&size=${size}`);
+    return this.http.get<Movimento[]>(`${this.API}`);
   }
 
   getMovimentoByVeiculoId(id: string): Observable<Movimento> {
